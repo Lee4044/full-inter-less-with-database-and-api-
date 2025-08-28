@@ -3,12 +3,11 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-
 const pool = mysql2.createPool({
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,       // <-- no spaces around .env
-  password: process.env.DB_PASSWORD,
-  database: process.env.DB_NAME,
+  host: process.env.DB_HOST || '192.168.100.93',
+  user: process.env.DB_USER || 'root',
+  password: process.env.DB_PASSWORD || 'HA123456$',
+  database: process.env.DB_NAME || 'education',
   connectionLimit: 10,
   queueLimit: 0,
   waitForConnections: true,
