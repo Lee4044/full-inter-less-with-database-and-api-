@@ -2,8 +2,6 @@ import bcrypt from 'bcrypt';
 import { pool } from '../config/db.js';
 
 export const registerUser = async (user) => {
-  console.log(user);
-
   const { first_name, last_name, username, email, password } = user;
   if (!first_name || !last_name || !username || !email || !password) {
     return { success: false, message: 'Please fill all fields' };
