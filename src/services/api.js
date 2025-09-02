@@ -9,6 +9,14 @@ const getAuthHeaders = () => {
 };
 
 const handleResponse = async (response) => {
+  // Check if response is actually JSON
+  const contentType = response.headers.get('content-type');
+  if (!contentType || !contentType.includes('application/json')) {
+    const text = await response.text();
+    console.error('Expected JSON but received:', text);
+    throw new Error(`Server returned ${response.status}: ${text.substring(0, 100)}...`);
+  }
+  
   const data = await response.json();
   if (!response.ok) {
     throw new Error(data.message || `HTTP error! status: ${response.status}`);
